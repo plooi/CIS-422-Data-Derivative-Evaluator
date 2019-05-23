@@ -1,46 +1,39 @@
 import numpy as np
-import pandas as pd
 import xarray as xr
 import matplotlib.pyplot as plt
 
-def plot_max_timeseries(data_array):
 
-	gcm = data.gcm.values.astype(str)
-	parameter = data.parameters.values.astype(str)
-	site = data.outlets.values.astype(str)
+'''
+A function which plots the maximum or mean daily streamflow values for a 
+given projection.
 
-	#label = site + "_" + gcm + "_" + parameter
+data_array: an xarray dataarray object with streamflow values for a certain projection
+max: a Boolean value. True: plot the maximum streamflow, False: plot the mean streamflow.
+'''
+def plot_timeseries(data_array, max):
 
-	plt.figure(figsize=(8,5))
+	gcm = data_array.gcm.values.astype(str)
+	parameter = data_array.parameters.values.astype(str)
+	site = data_array.outlets.values.astype(str)
 
-	maxes = []
-	for i in range(2100 - 1950):
-	    year = str(1950 + i)
-	    mx = np.max(data.sel(time=year))
-	    maxes.append(mx)
+	# FIXME: currently can't concatenate the projection parameters for 
+	# a label of the displayed plot. Need this functionality to differentiate 
+	# between different displayed timeseries. 
 
-	plt.ylabel('cfs')
-	plt.xlabel('year')
-	plt.plot([1950+i for i in range(150)], maxes, color='blue')
-	plt.show()
-
-
-def plot_mean_timeseries(data_array)
-	gcm = data.gcm.values.astype(str)
-	parameter = data.parameters.values.astype(str)
-	site = data.outlets.values.astype(str)
-
-	#label = site + "_" + gcm + "_" + parameter
+	# label = site + "_" + gcm + "_" + parameter
 
 	plt.figure(figsize=(8,5))
 
-	means = []
+	values = []
 	for i in range(2100 - 1950):
 	    year = str(1950 + i)
-	    mn = np.mean(data.sel(time=year))
-	    means.append(mn)
+	    if max:
+	    	val = np.max(data_array.sel(time=year))
+	    if not max:
+	    	val = np.mean(data_array.sel(time=year))
+	    values.append(val)
 
 	plt.ylabel('cfs')
 	plt.xlabel('year')
-	plt.plot([1950+i for i in range(150)], means, color='blue')
+	plt.plot([1950+i for i in range(150)], values, color='blue')
 	plt.show()
