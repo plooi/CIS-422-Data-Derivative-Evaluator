@@ -37,5 +37,6 @@ the GUI program.
 '''
 
 def main():
-	global all_data = xr.open_dataarray("FILEPATH")
+	global all_data
+	all_data = xr.open_dataarray("FILEPATH")
 	#run GUI
