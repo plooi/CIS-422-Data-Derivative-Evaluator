@@ -134,6 +134,11 @@ class Window(tk.Frame):
             "VIC P2",
             "VIC P3",
                 ]
+        MAX = [
+            "Max",
+            "Mean",
+            "Min"
+                ]
         rcpVar = tk.StringVar(self.master)
         rcpVar.set(RCP[0])
         rcp = tk.OptionMenu(self.master, rcpVar, *RCP)
@@ -153,6 +158,12 @@ class Window(tk.Frame):
         hmsVar.set(HMS[0])
         hms = tk.OptionMenu(self.master, hmsVar, *HMS)
         hms.pack(in_=topMenus, side=tk.LEFT)
+
+        maxVar = tk.StringVar(self.master)
+        maxVar.set(MAX[0])
+        Max = tk.OptionMenu(self.master, maxVar, *MAX)
+        Max.pack(in_=topMenus, side=tk.LEFT)
+
 
     def client_exit(self):
         exit()
