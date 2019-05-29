@@ -13,9 +13,5 @@ class FilePorterMenu(Menu):
     def __init__(self, root):
         Menu.__init__(self, root)
 
-        file = Menu(self)
-        file.add_command(label="Exit", command=exit)
-        file.add_command(label="Import")
-        file.add_command(label="Export")
-
-        self.add_cascade(label="File", menu=file)
+        self.add_command(label="Import CVF")
+        self.add_command(label="Export PNG")
