@@ -7,7 +7,7 @@ Class for projection
 """
 def main():
     print("Creating a new projection object\n")
-    p = Projection("RCP 4.5", "CanESM2", "Bias-corrected spatial disaggregation", "Precipitation Runoff Modeling System")
+    p = Projection("RCP 4.5", "CanESM2", "Bias-corrected spatial disaggregation", "Precipitation Runoff Modeling System", timeseries="min", location="Somewhere")
     
     print("Adding the point [1, 10]")
     p += [1, 10]
@@ -45,11 +45,13 @@ def main():
     
     
 class Projection:
-    def __init__(self, RCP = None, GCM = None, MDM = None, HMS = None, data = None):
+    def __init__(self, RCP = None, GCM = None, MDM = None, HMS = None, data = None, timeseries="max", location=None):
         self.RCP = RCP
         self.GCM = GCM
         self.MDM = MDM
         self.HMS = HMS
+        self.timeseries = timeseries
+        self.location = location
         if data == None:
             self.data = []
         else:
@@ -62,6 +64,11 @@ class Projection:
         return self.MDM
     def get_hms(self):
         return self.HMS
+    def get_timeseries(self):
+        return self.timeseries
+    def get_location(self):
+        return self.location
+        
     def set_rcp(self, RCP):
         self.RCP = RCP
     def set_gcm(self, GCM):
@@ -70,6 +77,10 @@ class Projection:
         self.MDM = MDM
     def set_HMS(self, HMS):
         self.HMS = HMS
+    def set_timeseries(self, t):
+        self.timeseries = t
+    def set_location(self, location):
+        self.location = location
     
     def __getitem__(self, i):
         if type(i) == type(1):
@@ -120,6 +131,8 @@ class Projection:
         out += "MDM: " + str(self.MDM) + "\n"
         out += "HMS: " + str(self.HMS) + "\n"
         out += "Length of data: " + str(len(self)) + "\n"
+        out += "timeseries: " + str(self.get_timeseries()) + "\n"
+        out += "location: " + str(self.get_location()) + "\n"
         out += "_____"
         return out
     def data_string(self, delimiter="\n"):

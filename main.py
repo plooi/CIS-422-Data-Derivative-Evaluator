@@ -23,9 +23,8 @@ streamflow value (True) or the mean daily streamflow value (False) plotted.
 '''
 
 def plot_button(gcm, mdm, rcp, hms, max):
-
 	data = all_data.sel(parameters = hms, downscale_method = mdm, gcm = gcm, rcp = rcp)
-	Projection new_projection = Projection(rcp, gcm, mdm, hms, data)
+	new_projection = Projection(rcp, gcm, mdm, hms, data)
 	active_projections.append(new_projection)
 
 	for proj in active_projections:
@@ -38,5 +37,6 @@ the GUI program.
 '''
 
 def main():
-	global all_data = xr.open_dataarray("FILEPATH")
+	global all_data
+	all_data = xr.open_dataarray("FILEPATH")
 	#run GUI
