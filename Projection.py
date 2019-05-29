@@ -45,13 +45,14 @@ def main():
     
     
 class Projection:
-    def __init__(self, RCP = None, GCM = None, MDM = None, HMS = None, data = None, max=True, location=None):
+    def __init__(self, RCP = None, GCM = None, MDM = None, HMS = None, data = None, max=True, location=None, visibility=True):
         self.RCP = RCP
         self.GCM = GCM
         self.MDM = MDM
         self.HMS = HMS
         self.max = max
         self.location = location
+        self.visibility = visibility
         if data == None:
             self.data = []
         else:
@@ -68,6 +69,11 @@ class Projection:
         return self.max
     def get_location(self):
         return self.location
+    def is_visible(self):
+        return self.visibility
+    def get_visibility(self):
+        return self.visibility
+        
         
     def set_rcp(self, RCP):
         self.RCP = RCP
@@ -81,6 +87,8 @@ class Projection:
         self.max = m
     def set_location(self, location):
         self.location = location
+    def set_visibility(self, visibility):
+        self.visibility = visibility
     
     def __getitem__(self, i):
         if type(i) == type(1):
@@ -133,6 +141,7 @@ class Projection:
         out += "Length of data: " + str(len(self)) + "\n"
         out += "max: " + str(self.get_max()) + "\n"
         out += "location: " + str(self.get_location()) + "\n"
+        out += "visibility: " + str(self.is_visible()) + "\n"
         out += "_____"
         return out
     def data_string(self, delimiter="\n"):
