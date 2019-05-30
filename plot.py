@@ -1,7 +1,7 @@
 import numpy as np
 import xarray as xr
 import matplotlib.pyplot as plt
-from matplotplib.figure import Figure
+from matplotlib.figure import Figure
 
 
 
