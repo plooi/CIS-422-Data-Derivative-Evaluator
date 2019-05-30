@@ -1,4 +1,8 @@
-
+"""
+Author: Peter Looi
+5/30/19
+Locations.py: Implements a location search
+"""
 
 
 
