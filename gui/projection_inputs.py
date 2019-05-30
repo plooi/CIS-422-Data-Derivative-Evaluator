@@ -23,7 +23,7 @@ GCM = [
     "GFDL-ESM2M",
     "HadGEM2-ES",
     "Inmcm4",
-    "IPSL-CM5A-MR"
+    "IPSL-CM5A-MR",
     "MIROCS"
 ]
 MDM = [
@@ -36,6 +36,12 @@ HMS = [
     "VIC P2",
     "VIC P3",
 ]
+MAX = [
+    "MAX"
+    "MED"
+    "MIN"
+        ]
+
 
 class ProjectionInputs(Frame):
     def __init__(self, root):
@@ -63,3 +69,8 @@ class ProjectionInputs(Frame):
         hmsVar.set(HMS[0])
         hms = OptionMenu(self, hmsVar, *HMS)
         hms.pack(side=LEFT)
+
+        maxVar = StringVar(self)
+        maxVar.set(MAX[0])
+        Max = OptionMenu(self, hmsVar, *MAX)
+        Max.pack(side=LEFT)
