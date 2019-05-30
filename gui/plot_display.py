@@ -17,7 +17,6 @@ from matplotlib.figure import Figure
 from tkinter.constants import TOP, BOTH
 from tkinter import Frame, Listbox, StringVar, OptionMenu
 import plot
-import main
 
 class PlotDisplay(Frame):
     def __init__(self, root):
