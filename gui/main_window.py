@@ -8,7 +8,6 @@ Brian Truong
 '''
 
 from typing import Union
-from enum import Enum
 
 from tkinter.constants import BOTH, RIGHT, END, TOP, BOTTOM
 from tkinter import Tk, Frame, Button, Listbox, Menu
@@ -20,7 +19,7 @@ from gui.projection_inputs import ProjectionInputs
 from gui.plot_display import PlotDisplay
 
 # Enum used to access GUI components
-class GUI(Enum):
+class GUI:
     outletSelection = 1
     filePorterMenu = 2
     projectionInputs = 3

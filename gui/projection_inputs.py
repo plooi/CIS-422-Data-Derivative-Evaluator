@@ -10,8 +10,8 @@ Brian Truong
 from tkinter.constants import TOP, LEFT, RIGHT
 from tkinter import Frame, StringVar, OptionMenu, Button
 import plot
-from gui_bootstrap import main_window
 from gui.main_window import GUI
+
 # Test constants
 RCP = [
     "RCP 4.5",
