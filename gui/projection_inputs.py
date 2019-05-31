@@ -14,34 +14,34 @@ from constants import GUI
 
 # Test constants
 RCP = [
-    "RCP 4.5",
-    "RCP 8.5"
+    "RCP45",
+    "RCP85"
 ]
 GCM = [
+    "HadGEM2-CC",
+    "HadGEW2-ES",
     "CanESM2",
-    "CCSM4",
     "CNRM-CM5",
     "CSIRO-Mk3-6-0",
     "GFDL-ESM2M",
-    "HadGEM2-ES",
-    "Inmcm4",
+    "inmcm4",
+    "MIROC5"
     "IPSL-CM5A-MR",
-    "MIROCS"
+    "CCSM4"
 ]
 MDM = [
-    "BCSD",
-    "MACA",
+    "bcsd",
+    "maca",
 ]
 HMS = [
     "PRMS",
-    "VIC P1",
-    "VIC P2",
-    "VIC P3",
+    "calib_inverse",
+    "ORNL",
+    "NCAR"
 ]
 MAX = [
     "MAX",
-    "MED",
-    "MIN"
+    "MEAN",
         ]
 
 
