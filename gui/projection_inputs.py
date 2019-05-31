@@ -83,9 +83,7 @@ class ProjectionInputs(Frame):
 
     def add(self):
         # def plot_button(gcm, mdm, rcp, hms, max):
-        MaxBool = False
-        if(self.maxVar.get() == MAX):
-            MaxBool = True
+        MaxBool = (self.maxVar.get() == 'MAX')
 
         f = plot.plot_button(
             self.gcmVar.get(),

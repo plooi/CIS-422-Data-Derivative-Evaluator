@@ -37,9 +37,9 @@ def plot_timeseries(projections):
         newPlot.show()
     return figure
 
-def plot_button(gcm, mdm, rcp, hms, max):
+def plot_button(gcm, mdm, rcp, hms, mx):
     data = all_data.sel(parameters=hms, downscale_method=mdm, gcm=gcm, rcp=rcp)
-    new_projection = Projection(rcp, gcm, mdm, hms, data)
+    new_projection = Projection(rcp, gcm, mdm, hms, data, mx)
     active_projections.append(new_projection)
 
 
