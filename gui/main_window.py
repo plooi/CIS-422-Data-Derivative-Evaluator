@@ -32,8 +32,8 @@ class MainWindow(Tk):
         self.columnconfigure(1, weight=1)
         self.rowconfigure(1, weight=1)
 
-        # self.oSelection = OutletSelection(self)
-        # self.oSelection.grid(row=0, column=0, rowspan=2, sticky='ns')
+        self.oSelection = OutletSelection(self)
+        self.oSelection.grid(row=0, column=0, rowspan=2, sticky='ns')
 
         self.fpMenu = FilePorterMenu(self)
         self.config(menu=self.fpMenu)

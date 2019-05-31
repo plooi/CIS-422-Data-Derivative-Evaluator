@@ -17,20 +17,20 @@ class OutletSelection(Frame):
 
     def __init__(self, root):
         Frame.__init__(self, root)
-        self.rowconfigure(2, weight=1)
+        self.rowconfigure(1, weight=1)
 
-        self.title = Label(text='Location: ').grid(row=0, column=0, sticky='nw')
+        self.title = Label(self, text='Location: ').grid(row=0, column=0, sticky='nw')
 
         self.outletVariable = StringVar()
-        self.outletFilter = Entry(textvariable=self.outletVariable).grid(row=0, column=1, sticky='ew')
+        self.outletFilter = Entry(self, textvariable=self.outletVariable).grid(row=0, column=1, sticky='ew')
 
         ## buttons
-        self.searchButton = Button(text="search!", command=self.search_callback)
-        self.searchButton.grid(row=0, column=2, columnspan=2, sticky='nw')
+        self.searchButton = Button(self, text="search!", command=self.search_callback)
+        self.searchButton.grid(row=0, column=2, sticky='nw')
 
         ## listbox
-        self.outlets = Listbox()#, width=30)
-        self.outlets.grid(row=1, column=0, columnspan=2, sticky='s', padx=10, pady=10)
+        self.outlets = Listbox(self)#, width=30)
+        self.outlets.grid(row=1, column=0, columnspan=3, sticky='nsew', padx=10, pady=10)
 
 
     def search_callback(self):
