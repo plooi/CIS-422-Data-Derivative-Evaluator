@@ -10,7 +10,6 @@ Brian Truong
 from tkinter.constants import TOP, LEFT, RIGHT
 from tkinter import Frame, StringVar, OptionMenu, Button
 import plot
-from gui_bootstrap import main_window
 from gui.main_window import GUI
 # Test constants
 RCP = [
@@ -48,6 +47,7 @@ MAX = [
 class ProjectionInputs(Frame):
     def __init__(self, root):
         Frame.__init__(self, root)
+        self.main_window = root
 
         topMenus = Frame(self)
         topMenus.pack(side=TOP, fill='x', expand=False)
@@ -90,5 +90,5 @@ class ProjectionInputs(Frame):
             self.maxVar.get()
         )
 
-        pDisp = main_window.getComponent(GUI.plotDisplay)
+        pDisp = self.main_window.getComponent(GUI.plotDisplay)
         pDisp.plot(f)
