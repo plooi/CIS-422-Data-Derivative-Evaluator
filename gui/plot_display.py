@@ -8,6 +8,7 @@ Brian Truong
 '''
 
 import matplotlib
+from Projection import active_projections
 matplotlib.use("TkAgg")
 
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
@@ -25,8 +26,8 @@ class PlotDisplay(Frame):
         # f = Figure(figsize=(5, 5), dpi=100)
         # a = f.add_subplot(111)
         # a.plot([1, 2, 3, 4, 5, 6, 7, 8], [5, 6, 1, 3, 8, 9, 3, 5])
-        global active_projections
-        f = plot.plot_timeseries(active_projections)
+        #gcm, mdm, rcp, hms, max
+        f = plot.plot_button('HadGEM2-CC', 'bcsd', 'RCP85', 'PRMS', 1)
 
         canvas = FigureCanvasTkAgg(f, self)
         canvas.draw()
