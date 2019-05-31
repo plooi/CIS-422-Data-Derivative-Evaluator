@@ -53,40 +53,41 @@ class ProjectionInputs(Frame):
         topMenus.pack(side=TOP, fill='x', expand=False)
 
         self.rcpVar = StringVar(self)
-        rcpVar.set(RCP[0])
-        rcp = OptionMenu(self, rcpVar, *RCP)
+        self.rcpVar.set(RCP[0])
+        rcp = OptionMenu(self, self.rcpVar, *RCP)
         rcp.pack(side=LEFT)
 
         self.gcmVar = StringVar(self)
-        gcmVar.set(GCM[0])
-        gcm = OptionMenu(self, gcmVar, *GCM)
+        self.gcmVar.set(GCM[0])
+        gcm = OptionMenu(self, self.gcmVar, *GCM)
         gcm.pack(side=LEFT)
 
         self.mdmVar = StringVar(self)
-        mdmVar.set(MDM[0])
-        mdm = OptionMenu(self, mdmVar, *MDM)
+        self.mdmVar.set(MDM[0])
+        mdm = OptionMenu(self, self.mdmVar, *MDM)
         mdm.pack(side=LEFT)
 
         self.hmsVar = StringVar(self)
-        hmsVar.set(HMS[0])
-        hms = OptionMenu(self, hmsVar, *HMS)
+        self.hmsVar.set(HMS[0])
+        hms = OptionMenu(self, self.hmsVar, *HMS)
         hms.pack(side=LEFT)
 
         self.maxVar = StringVar(self)
-        maxVar.set(MAX[0])
-        Max = OptionMenu(self, maxVar, *MAX)
+        self.maxVar.set(MAX[0])
+        Max = OptionMenu(self, self.maxVar, *MAX)
         Max.pack(side=LEFT)
 
-        PlotButton = Button(self, text="Plot", command=add)
+        PlotButton = Button(self, text="Plot", command=self.add)
         PlotButton.pack(side=RIGHT)
 
     def add(self):
-        f = plot.plot_button( #TODO
+        # def plot_button(gcm, mdm, rcp, hms, max):
+        f = plot.plot_button(
             self.gcmVar.get(),
-            self.gcmVar.get(),
-            self.gcmVar.get(),
-            self.gcmVar.get(),
-            self.gcmVar.get()
+            self.mdmVar.get(),
+            self.rcpVar.get(),
+            self.hmsVar.get(),
+            self.maxVar.get()
         )
 
         pDisp = main_window.getComponent(GUI.plotDisplay)
