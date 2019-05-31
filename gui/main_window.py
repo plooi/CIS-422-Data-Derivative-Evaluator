@@ -7,6 +7,9 @@ Ben Lain
 Brian Truong
 '''
 
+from typing import Union
+from enum import Enum
+
 from tkinter.constants import BOTH, RIGHT, END, TOP, BOTTOM
 from tkinter import Tk, Frame, Button, Listbox, Menu
 
@@ -16,13 +19,23 @@ from gui.projections_list import ProjectionsList
 from gui.projection_inputs import ProjectionInputs
 from gui.plot_display import PlotDisplay
 
+# Enum used to access GUI components
+class GUI(Enum):
+    outletSelection = 1
+    filePorterMenu = 2
+    projectionInputs = 3
+    projectionsList = 4
+    plotDisplay = 5
+
+# Main window class definition
 class MainWindow(Tk):
     def __init__(self, master=None):
         Tk.__init__(self)
         self.geometry("1024x576")
-        self.init_window()
+        self._init_window()
 
-    def init_window(self):
+    # Initialize the main window and its child components
+    def _init_window(self):
         self.title("Hydroclimate Change Data Visualizer")
         self.columnconfigure(1, weight=1)
         self.rowconfigure(1, weight=1)
@@ -41,3 +54,24 @@ class MainWindow(Tk):
 
         self.pDisp = PlotDisplay(self)
         self.pDisp.grid(row=1, column=1, sticky='nswe')
+
+    # Get a component currently maintained in the GUI
+    def getComponent(self, component: GUI
+        ) -> Union[OutletSelection,
+                   FilePorterMenu,
+                   ProjectionInputs,
+                   ProjectionsList,
+                   PlotDisplay,
+                   None]:
+        if component == GUI.outletSelection:
+            return self.oSelection
+        elif component == GUI.filePorterMenu:
+            return self.fpMenu
+        elif component == GUI.projectionInputs:
+            return self.pInputs
+        elif component == GUI.projectionsList:
+            return self.pList
+        elif component == GUI.plotDisplay:
+            return self.pDisp
+        else:
+            return None
