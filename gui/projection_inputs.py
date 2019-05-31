@@ -10,6 +10,8 @@ Brian Truong
 from tkinter.constants import TOP, LEFT, RIGHT
 from tkinter import Frame, StringVar, OptionMenu, Button
 import plot
+from gui_bootstrap import main_window
+from gui.main_window import GUI
 # Test constants
 RCP = [
     "RCP 4.5",
@@ -50,30 +52,42 @@ class ProjectionInputs(Frame):
         topMenus = Frame(self)
         topMenus.pack(side=TOP, fill='x', expand=False)
 
-        rcpVar = StringVar(self)
+        self.rcpVar = StringVar(self)
         rcpVar.set(RCP[0])
         rcp = OptionMenu(self, rcpVar, *RCP)
         rcp.pack(side=LEFT)
 
-        gcmVar = StringVar(self)
+        self.gcmVar = StringVar(self)
         gcmVar.set(GCM[0])
         gcm = OptionMenu(self, gcmVar, *GCM)
         gcm.pack(side=LEFT)
 
-        mdmVar = StringVar(self)
+        self.mdmVar = StringVar(self)
         mdmVar.set(MDM[0])
         mdm = OptionMenu(self, mdmVar, *MDM)
         mdm.pack(side=LEFT)
 
-        hmsVar = StringVar(self)
+        self.hmsVar = StringVar(self)
         hmsVar.set(HMS[0])
         hms = OptionMenu(self, hmsVar, *HMS)
         hms.pack(side=LEFT)
 
-        maxVar = StringVar(self)
+        self.maxVar = StringVar(self)
         maxVar.set(MAX[0])
         Max = OptionMenu(self, maxVar, *MAX)
         Max.pack(side=LEFT)
 
-        PlotButton = Button(self, text="Plot", command=plot.plot_button)
+        PlotButton = Button(self, text="Plot", command=add)
         PlotButton.pack(side=RIGHT)
+
+    def add(self):
+        f = plot.plot_button( #TODO
+            self.gcmVar.get(),
+            self.gcmVar.get(),
+            self.gcmVar.get(),
+            self.gcmVar.get(),
+            self.gcmVar.get()
+        )
+
+        pDisp = main_window.getComponent(GUI.plotDisplay)
+        pDisp.plot(f)
