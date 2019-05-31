@@ -7,9 +7,9 @@ Ben Lain
 Brian Truong
 '''
 
-from tkinter.constants import TOP, LEFT
-from tkinter import Frame, StringVar, OptionMenu
-
+from tkinter.constants import TOP, LEFT, RIGHT
+from tkinter import Frame, StringVar, OptionMenu, Button
+import plot
 # Test constants
 RCP = [
     "RCP 4.5",
@@ -74,3 +74,6 @@ class ProjectionInputs(Frame):
         maxVar.set(MAX[0])
         Max = OptionMenu(self, maxVar, *MAX)
         Max.pack(side=LEFT)
+
+        PlotButton = Button(self, text="Plot", command=plot.plot_button)
+        PlotButton.pack(side=RIGHT)
