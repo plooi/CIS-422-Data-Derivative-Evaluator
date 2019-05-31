@@ -1,37 +1,43 @@
-
+import xarray as xr
 
 """
 Peter Looi
 
 Class for projection
 """
+
+# an array of the projections which the user wants displayed
+active_projections = []
+all_data = xr.open_dataarray("TDA.nc")
+
+
 def main():
     print("Creating a new projection object\n")
     p = Projection("RCP 4.5", "CanESM2", "Bias-corrected spatial disaggregation", "Precipitation Runoff Modeling System", max=False, location="Somewhere")
-    
+
     print("Adding the point [1, 10]")
     p += [1, 10]
-    
+
     print("Adding the point [2, 12]")
     p += [2,12]
-    
+
     print("Adding the point [3, 10]")
     p += [3,10]
-    
+
     print("Adding the point [4, 7]\n\n")
     p += [4,7]
-    
+
     print("Data in the projection is")
     print(p.data_string())
-    
+
     print("The string representation of the projection is")
     print(p)
-    
+
     print("\n\nLooping through the projection and printing out each data point")
     for data in p:
         print(data)
-    
-    
+
+
     print("\n\nThe GCM is \"" + str(p.get_gcm()) + "\"")
     print("The second data point is", p[1])
     print("The number of data points is", len(p))
@@ -41,9 +47,9 @@ def main():
     plt.plot(p.x_values(), p.y_values(), 'ro')
     plt.axis([0,6,0,20])
     plt.show()
-    
-    
-    
+
+
+
 class Projection:
     def __init__(self, RCP = None, GCM = None, MDM = None, HMS = None, data = None, max=True, location=None, visibility=True):
         self.RCP = RCP
@@ -53,10 +59,7 @@ class Projection:
         self.max = max
         self.location = location
         self.visibility = visibility
-        if data == None:
-            self.data = []
-        else:
-            self.data = data
+        self.data = data
     def get_rcp(self):
         return self.RCP
     def get_gcm(self):
@@ -73,8 +76,8 @@ class Projection:
         return self.visibility
     def get_visibility(self):
         return self.visibility
-        
-        
+
+
     def set_rcp(self, RCP):
         self.RCP = RCP
     def set_gcm(self, GCM):
@@ -89,7 +92,7 @@ class Projection:
         self.location = location
     def set_visibility(self, visibility):
         self.visibility = visibility
-    
+
     def __getitem__(self, i):
         if type(i) == type(1):
             return self.data[i]
@@ -134,7 +137,7 @@ class Projection:
             yield self.data[i]
     def __str__(self):
         out = "_____\nProjection:\n"
-        out += "RCP: " + str(self.RCP) + "\n" 
+        out += "RCP: " + str(self.RCP) + "\n"
         out += "GCM: " + str(self.GCM) + "\n"
         out += "MDM: " + str(self.MDM) + "\n"
         out += "HMS: " + str(self.HMS) + "\n"
@@ -160,9 +163,9 @@ class Projection:
             y.append(data[1])
         return y
 
-        
+
 if __name__ == "__main__": main()
-        
-        
-        
-        
+
+
+
+
