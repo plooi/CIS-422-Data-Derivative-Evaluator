@@ -37,8 +37,8 @@ HMS = [
     "VIC P3",
 ]
 MAX = [
-    "MAX"
-    "MED"
+    "MAX",
+    "MED",
     "MIN"
         ]
 
@@ -72,5 +72,5 @@ class ProjectionInputs(Frame):
 
         maxVar = StringVar(self)
         maxVar.set(MAX[0])
-        Max = OptionMenu(self, hmsVar, *MAX)
+        Max = OptionMenu(self, maxVar, *MAX)
         Max.pack(side=LEFT)
