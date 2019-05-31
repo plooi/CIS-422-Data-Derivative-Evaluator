@@ -10,7 +10,7 @@ Brian Truong
 from tkinter.constants import TOP, LEFT, RIGHT
 from tkinter import Frame, StringVar, OptionMenu, Button
 import plot
-from gui.main_window import GUI
+from constants import GUI
 
 # Test constants
 RCP = [

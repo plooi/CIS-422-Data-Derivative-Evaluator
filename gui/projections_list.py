@@ -19,7 +19,7 @@ class ProjectionsList(Frame):
         self.view = Canvas(self)
         self.view.config(relief = 'flat', width = 64, bd = 2)
 
-        self.scrollView.grid(column = 0, row = 0, sticky = 'nsew')
+        self.view.grid(column = 0, row = 0, sticky = 'nsew')
 
         self.yScroll.config(command = self.view.yview)
 
@@ -29,7 +29,7 @@ class ProjectionsList(Frame):
         self.view.config(yscrollcommand = self.yScroll.set,
                          scrollregion = (0, 0, 100, 100))
 
-        self.yScroll.lift(self.scrollwindow)
+        self.yScroll.lift(self.list)
         self.list.bind('<Configure>', self._configure)
 
     def _configure(self, event):

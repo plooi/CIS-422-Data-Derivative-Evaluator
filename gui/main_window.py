@@ -17,14 +17,7 @@ from gui.file_porter_menu import FilePorterMenu
 from gui.projections_list import ProjectionsList
 from gui.projection_inputs import ProjectionInputs
 from gui.plot_display import PlotDisplay
-
-# Enum used to access GUI components
-class GUI:
-    outletSelection = 1
-    filePorterMenu = 2
-    projectionInputs = 3
-    projectionsList = 4
-    plotDisplay = 5
+from constants import GUI
 
 # Main window class definition
 class MainWindow(Tk):
@@ -39,8 +32,8 @@ class MainWindow(Tk):
         self.columnconfigure(1, weight=1)
         self.rowconfigure(1, weight=1)
 
-        self.oSelection = OutletSelection(self)
-        self.oSelection.grid(row=0, column=0, rowspan=2, sticky='ns')
+        # self.oSelection = OutletSelection(self)
+        # self.oSelection.grid(row=0, column=0, rowspan=2, sticky='ns')
 
         self.fpMenu = FilePorterMenu(self)
         self.config(menu=self.fpMenu)
@@ -48,8 +41,8 @@ class MainWindow(Tk):
         self.pInputs = ProjectionInputs(self)
         self.pInputs.grid(row=0, column=1, columnspan=2, sticky='w')
 
-        self.pList = ProjectionsList(self)
-        self.pList.grid(row=1, column=2, sticky='ns')
+        # self.pList = ProjectionsList(self)
+        # self.pList.grid(row=1, column=2, sticky='ns')
 
         self.pDisp = PlotDisplay(self)
         self.pDisp.grid(row=1, column=1, sticky='nswe')
