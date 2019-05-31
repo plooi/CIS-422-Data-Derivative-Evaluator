@@ -16,6 +16,7 @@ Input a string to search for. For example "Willamette"
 Returns a list of Locations that match that search string
 """
 def search_locations(search_string):
+    locations = get_locations()
     search_string = search_string.strip()
     search_string = search_string.split(" ")
     if len(search_string) == 0:
