@@ -37,14 +37,16 @@ def plot_timeseries(projections):
         newPlot.show()
     return figure
 
-def plot_button(gcm, mdm, rcp, hms, mx):
+def add_projection(gcm: str, mdm: str, rcp: str, hms: str, mx: bool):
     data = all_data.sel(parameters=hms, downscale_method=mdm, gcm=gcm, rcp=rcp)
     new_projection = Projection(rcp, gcm, mdm, hms, data, mx)
     active_projections.append(new_projection)
 
-
+def create_figure() -> Figure:
     figure = Figure(figsize=(8,5), dpi=100)
     for projection in active_projections:
+        if not (projection.get_visibility()):
+            continue
         # label = projection.rcp + "_" + projection.gcm + "_" + projection.mdm + "_" + projection.hms
         newPlot = figure.add_subplot(111)
 

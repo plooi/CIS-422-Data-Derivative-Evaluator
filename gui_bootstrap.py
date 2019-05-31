@@ -1,7 +1,17 @@
-from gui.main_window import MainWindow
+'''
+GUI Bootstrapping
 
-main_window = MainWindow()
+Provides the live instance of the main window,
+and a method to instantiate the live instance
 
-def startGui():
-    if (__name__ == '__main__'):
-        main_window.mainloop()
+Author: Brian Truong
+'''
+
+main_window = None
+
+def bootstrap():
+    from gui.main_window import MainWindow
+
+    global main_window 
+    main_window = MainWindow()
+    main_window.mainloop()

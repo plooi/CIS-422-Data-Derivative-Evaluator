@@ -38,9 +38,11 @@ class PlotDisplay(Frame):
         # toolbar.update()
         # canvas._tkcanvas.pack(side=TOP, fill=BOTH, expand=True)
         # canvas._tkcanvas.grid(sticky=S, expand=True)
-    def plot(self, f: Figure):
+    def update(self):
         for child in self.winfo_children():
             child.destroy()
+
+        f = plot.create_figure()
 
         canvas = FigureCanvasTkAgg(f, self)
         canvas.draw()
@@ -50,4 +52,3 @@ class PlotDisplay(Frame):
         toolbar = NavigationToolbar2Tk(canvas, self)
         toolbar.update()
         canvas._tkcanvas.pack(side=TOP, fill=BOTH, expand=True)
-        canvas._tkcanvas.grid(sticky='s', expand=True)

@@ -41,8 +41,8 @@ class MainWindow(Tk):
         self.pInputs = ProjectionInputs(self)
         self.pInputs.grid(row=0, column=1, columnspan=2, sticky='w')
 
-        # self.pList = ProjectionsList(self)
-        # self.pList.grid(row=1, column=2, sticky='ns')
+        self.pList = ProjectionsList(self)
+        self.pList.grid(row=1, column=2, sticky='ns')
 
         self.pDisp = PlotDisplay(self)
         self.pDisp.grid(row=1, column=1, sticky='nswe')

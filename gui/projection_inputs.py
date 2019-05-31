@@ -9,8 +9,10 @@ Brian Truong
 
 from tkinter.constants import TOP, LEFT, RIGHT
 from tkinter import Frame, StringVar, OptionMenu, Button
-import plot
+
 from constants import GUI
+import gui_bootstrap as gb
+import plot
 
 # Test constants
 RCP = [
@@ -48,7 +50,6 @@ MAX = [
 class ProjectionInputs(Frame):
     def __init__(self, root):
         Frame.__init__(self, root)
-        self.main_window = root
 
         topMenus = Frame(self)
         topMenus.pack(side=TOP, fill='x', expand=False)
@@ -85,7 +86,7 @@ class ProjectionInputs(Frame):
         # def plot_button(gcm, mdm, rcp, hms, max):
         MaxBool = (self.maxVar.get() == 'MAX')
 
-        f = plot.plot_button(
+        f = plot.add_projection(
             self.gcmVar.get(),
             self.mdmVar.get(),
             self.rcpVar.get(),
@@ -93,5 +94,8 @@ class ProjectionInputs(Frame):
             MaxBool
         )
 
-        pDisp = self.main_window.getComponent(GUI.plotDisplay)
-        pDisp.plot(f)
+        pDisp = gb.main_window.getComponent(GUI.plotDisplay)
+        pDisp.update()
+
+        pList = gb.main_window.getComponent(GUI.projectionsList)
+        pList.update()
