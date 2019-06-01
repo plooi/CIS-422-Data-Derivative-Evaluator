@@ -12,12 +12,17 @@ import tkinter as tk
 from tkinter.constants import RIGHT, END
 from tkinter import Frame, Listbox, Entry, Label, Button, StringVar, Scrollbar, Canvas
 import Locations as location
+import gui_bootstrap as gb
+from constants import GUI
 
 class OutletSelection(Frame):
 
 
     def __init__(self, root):
         Frame.__init__(self, root)
+
+        self.locations = []
+
         self.rowconfigure(1, weight=1)
         self.columnconfigure(0, weight=1)
 
@@ -27,7 +32,7 @@ class OutletSelection(Frame):
         self.outletFilter = Entry(self, textvariable=self.outletVariable).grid(row=0, column=1, sticky='ew')
 
         # Buttons
-        self.searchButton = Button(self, text="search", command=self.search_callback)
+        self.searchButton = Button(self, text="Search", command=self._search_callback)
         self.searchButton.grid(row=0, column=2, sticky='nwe', padx=15)
 
         # Listbox frame and scrollbars parent
@@ -39,7 +44,8 @@ class OutletSelection(Frame):
         # Listbox with search results
         self.outlets = Listbox(self.results, height=20, width=30)
         self.outlets.grid(row=0, column=0, columnspan=2, sticky='nsew')
-        self.search_callback()
+        self.outlets.bind('<<ListboxSelect>>', self._select_callback)
+        self._search_callback()
 
         # Y scrollbar
         self.yscrollbar = Scrollbar(self.results, orient="vertical")
@@ -53,12 +59,20 @@ class OutletSelection(Frame):
         self.xscrollbar.grid(row=1, column=0, columnspan=2, sticky="ew")
         self.outlets.config(xscrollcommand=self.xscrollbar.set)
 
-    def search_callback(self):
+    def _select_callback(self, event):
+        widget = event.widget
+        selection = widget.curselection()
+        code = self.locations[selection[0]].get_abbreviation()
+
+        pInputs = gb.main_window.getComponent(GUI.projectionInputs)
+        pInputs.setOutlet(code)
+
+    def _search_callback(self):
         self.outlets.delete(0, END)
 
         t = str(self.outletVariable.get())
-        locations = location.search_locations(t)
+        self.locations = location.search_locations(t)
 
-        for loc in locations:
+        for loc in self.locations:
             self.outlets.insert(END, loc)
 

@@ -8,7 +8,7 @@ Brian Truong
 '''
 
 from tkinter.constants import TOP, LEFT, RIGHT
-from tkinter import Frame, StringVar, OptionMenu, Button, messagebox
+from tkinter import Frame, StringVar, OptionMenu, Button, messagebox, Label
 
 from constants import GUI
 import gui_bootstrap as gb
@@ -67,6 +67,11 @@ class ProjectionInputs(Frame):
         self.topMenus = Frame(self)
         self.topMenus.pack(side=TOP, fill='x', expand=False)
 
+        Label(self, text='Outlet: ').pack(side=LEFT)
+        self.outVar = StringVar(self)
+        self.outVar.set('None Selected')
+        self.out = Label(self, textvariable=self.outVar).pack(side=LEFT)
+
         self.rcpVar = StringVar(self)
         self.rcpVar.set(RCP[0])
         rcp = OptionMenu(self, self.rcpVar, *RCP)
@@ -100,11 +105,16 @@ class ProjectionInputs(Frame):
         PlotButton = Button(self, text="Plot", command=self.add)
         PlotButton.pack(side=RIGHT)
 
+    def setOutlet(self, outlet: str):
+        '''Sets the outlet from which to create the projection'''
+        self.outVar.set(outlet)
+
     def add(self):
         # def plot_button(gcm, mdm, rcp, hms, max):
         MaxBool = (self.maxVar.get() == 'MAX')
         try:
             f = plot.add_projection(
+            self.outVar.get(),
             self.gcmVar.get(),
             self.mdmVar.get(),
             self.rcpVar.get(),

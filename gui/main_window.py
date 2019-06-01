@@ -25,7 +25,7 @@ title = "Hydroclimate Change Data Visualizer - "
 class MainWindow(Tk):
     def __init__(self, master=None):
         Tk.__init__(self)
-        self.geometry("1024x576")
+        self.geometry("1280x720")
         self._init_window()
 
     # Initialize the main window and its child components
