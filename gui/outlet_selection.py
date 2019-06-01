@@ -32,6 +32,7 @@ class OutletSelection(Frame):
         ## listbox
         self.outlets = Listbox(self)#, width=30)
         self.outlets.grid(row=1, column=0, columnspan=3, sticky='nsew', padx=10, pady=10)
+        self.search_callback()
 
 
     def search_callback(self):
