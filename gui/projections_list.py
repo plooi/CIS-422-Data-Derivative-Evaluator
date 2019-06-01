@@ -47,7 +47,7 @@ class ProjectionsList(Frame):
         for child in self.list.winfo_children():
             child.destroy()
         for p in active_projections:
-            PListItem(self.list, p).pack(pady=(0, 16))
+            PListItem(self.list, p).pack(pady=(0, 8))
 
     def _configure(self, event):
         # update the scrollbars to match the size of the inner frame
@@ -73,6 +73,12 @@ class PListItem(Frame):
         Frame.__init__(self, root)
 
         self.proj = projection
+        self.config(
+            highlightbackground=self.proj.get_color(),
+            highlightcolor=self.proj.get_color(),
+            highlightthickness=2,
+            bd=0
+        )
 
         # Label that specifies the location
         # TODO Location not specified!
