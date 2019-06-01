@@ -64,8 +64,8 @@ class ProjectionInputs(Frame):
     def __init__(self, root):
         Frame.__init__(self, root)
 
-        topMenus = Frame(self)
-        topMenus.pack(side=TOP, fill='x', expand=False)
+        self.topMenus = Frame(self)
+        self.topMenus.pack(side=TOP, fill='x', expand=False)
 
         self.rcpVar = StringVar(self)
         self.rcpVar.set(RCP[0])

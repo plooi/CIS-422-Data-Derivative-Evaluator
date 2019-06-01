@@ -32,22 +32,22 @@ class MainWindow(Tk):
     def _init_window(self):
         self.title(title + " No file selected")
         self.columnconfigure(1, weight=1)
-        self.rowconfigure(1, weight=1)
-
-        self.oSelection = OutletSelection(self)
-        self.oSelection.grid(row=0, column=0, rowspan=2, sticky='ns')
+        self.rowconfigure(2, weight=1)
 
         self.fpMenu = FilePorterMenu(self)
-        self.config(menu=self.fpMenu)
+        self.fpMenu.grid(row=0, sticky='w', pady=(0, 16))
+
+        self.oSelection = OutletSelection(self)
+        self.oSelection.grid(row=1, column=0, rowspan=2, sticky='ns')
 
         self.pInputs = ProjectionInputs(self)
-        self.pInputs.grid(row=0, column=1, columnspan=2, sticky='w')
+        self.pInputs.grid(row=1, column=1, columnspan=2, sticky='w')
 
         self.pList = ProjectionsList(self)
-        self.pList.grid(row=1, column=2, sticky='ns')
+        self.pList.grid(row=2, column=2, sticky='ns')
 
         self.pDisp = PlotDisplay(self)
-        self.pDisp.grid(row=1, column=1, sticky='nswe')
+        self.pDisp.grid(row=2, column=1, sticky='nswe')
 
     # Displays the .nc file currently in use
     def setActiveNC(self, file: str):

@@ -114,7 +114,6 @@ class PListItem(Frame):
         ).grid(row=0, column=2, rowspan=2, sticky='ne', padx=(5, 0))
 
     def remove(self):
-        # TODO Remove function not funcitoning as expected
         self.proj.remove()
 
         pDisp = gb.main_window.getComponent(GUI.plotDisplay)
@@ -122,8 +121,6 @@ class PListItem(Frame):
 
         pList = gb.main_window.getComponent(GUI.projectionsList)
         pList.update()
-
-        return
 
     def toggle(self):
         self.proj.set_visibility(self.visibility.get())

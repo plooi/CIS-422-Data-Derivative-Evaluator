@@ -7,17 +7,16 @@ Ben Lain
 Brian Truong
 '''
 
-from tkinter import Menu, filedialog, messagebox
+from tkinter import Frame, Button, filedialog, messagebox
 
 from file_io import fileIO
 import gui_bootstrap as gb
 from constants import OS_HOME_DIR, FILE_INPUTS
 
-class FilePorterMenu(Menu):
+class FilePorterMenu(Frame):
     def __init__(self, root):
-        Menu.__init__(self, root)
-
-        self.add_command(label='Import .NC', command=self.getNC)
+        Frame.__init__(self, root)
+        Button(self, text='Import .NC', command=self.getNC).pack()
 
     def getNC(self):
         try:
