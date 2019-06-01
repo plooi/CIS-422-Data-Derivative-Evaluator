@@ -63,5 +63,3 @@ class OutletSelection(Frame):
             # print(loc)
             self.outlets.insert(END, loc)
 
-
-
