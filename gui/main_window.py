@@ -19,6 +19,8 @@ from gui.projection_inputs import ProjectionInputs
 from gui.plot_display import PlotDisplay
 from constants import GUI
 
+title = "Hydroclimate Change Data Visualizer - "
+
 # Main window class definition
 class MainWindow(Tk):
     def __init__(self, master=None):
@@ -28,7 +30,7 @@ class MainWindow(Tk):
 
     # Initialize the main window and its child components
     def _init_window(self):
-        self.title("Hydroclimate Change Data Visualizer")
+        self.title(title + " No file selected")
         self.columnconfigure(1, weight=1)
         self.rowconfigure(1, weight=1)
 
@@ -46,6 +48,10 @@ class MainWindow(Tk):
 
         self.pDisp = PlotDisplay(self)
         self.pDisp.grid(row=1, column=1, sticky='nswe')
+
+    # Displays the .nc file currently in use
+    def setActiveNC(self, file: str):
+        self.title(title + " " + file)
 
     # Get a component currently maintained in the GUI
     def getComponent(self, component: GUI

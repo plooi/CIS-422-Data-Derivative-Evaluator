@@ -8,8 +8,7 @@ Class for projection
 
 # an array of the projections which the user wants displayed
 active_projections = []
-all_data = xr.open_dataarray("TDA.nc")
-
+# all_data = xr.open_dataarray("TDA.nc")
 
 def main():
     print("Creating a new projection object\n")

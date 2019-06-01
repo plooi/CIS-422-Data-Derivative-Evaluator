@@ -5,6 +5,7 @@ matplotlib.use('PS')
 import matplotlib.pyplot as plt
 from matplotlib.figure import Figure
 from Projection import *
+from file_io import fileIO
 
 
 '''
@@ -43,7 +44,7 @@ def plot_timeseries(projections):
     return figure
 
 def add_projection(gcm: str, mdm: str, rcp: str, hms: str, color: str, mx: bool):
-    data = all_data.sel(parameters=hms, downscale_method=mdm, gcm=gcm, rcp=rcp)
+    data = fileIO.allData.sel(parameters=hms, downscale_method=mdm, gcm=gcm, rcp=rcp)
     new_projection = Projection(rcp, gcm, mdm, hms, color, data, mx)
     active_projections.append(new_projection)
 
