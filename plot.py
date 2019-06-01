@@ -43,7 +43,6 @@ def add_projection(gcm: str, mdm: str, rcp: str, hms: str, color: str, mx: bool)
 
 def create_figure() -> Figure:
     figure = Figure(figsize=(8,5), dpi=100)
-    plotNum = 0
     for projection in active_projections:
         if not (projection.get_visibility()):
             continue
@@ -62,6 +61,5 @@ def create_figure() -> Figure:
         newPlot.set_ylabel('cfs')
         newPlot.set_xlabel('year')
         newPlot.plot([1950+i for i in range(150)], values, projection.get_color())
-        plotNum = (plotNum+1) % len(colors)
 
     return figure
