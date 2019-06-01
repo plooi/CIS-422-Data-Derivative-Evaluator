@@ -51,11 +51,12 @@ def main():
 
 
 class Projection:
-    def __init__(self, RCP = None, GCM = None, MDM = None, HMS = None, data = None, max=True, location=None, visibility=True):
+    def __init__(self, RCP = None, GCM = None, MDM = None, HMS = None, color = None, data = None, max=True, location=None, visibility=True):
         self.RCP = RCP
         self.GCM = GCM
         self.MDM = MDM
         self.HMS = HMS
+        self.color = color
         self.max = max
         self.location = location
         self.visibility = visibility
@@ -68,6 +69,8 @@ class Projection:
         return self.MDM
     def get_hms(self):
         return self.HMS
+    def get_color(self):
+        return self.color
     def get_max(self):
         return self.max
     def get_location(self):
@@ -86,6 +89,8 @@ class Projection:
         self.MDM = MDM
     def set_HMS(self, HMS):
         self.HMS = HMS
+    def set_color(self, color):
+        self.color = color
     def set_max(self, m):
         self.max = m
     def set_location(self, location):
@@ -105,6 +110,8 @@ class Projection:
                 return self.MDM
             elif i.upper() == "HMS":
                 return self.HMS
+            elif i.upper() == "color":
+                return self.color
             else:
                 raise Exception("Unrecognized property \"" + str(i) + '"')
         else:
@@ -123,6 +130,8 @@ class Projection:
                 self.MDM = x
             elif i.upper() == "HMS":
                 self.HMS = x
+            elif i.upper() == "color":
+                self.color = x
             else:
                 raise Exception("Unrecognized property \"" + str(i) + '"')
         else:
@@ -141,6 +150,7 @@ class Projection:
         out += "GCM: " + str(self.GCM) + "\n"
         out += "MDM: " + str(self.MDM) + "\n"
         out += "HMS: " + str(self.HMS) + "\n"
+        out += "Color: " + str(self.color) + "\n"
         out += "Length of data: " + str(len(self)) + "\n"
         out += "max: " + str(self.get_max()) + "\n"
         out += "location: " + str(self.get_location()) + "\n"

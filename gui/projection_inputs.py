@@ -46,6 +46,19 @@ MAX = [
     "MEAN",
         ]
 
+colors = [
+    'red',
+    'blue',
+    'green',
+    'yellow',
+    'orange',
+    'purple',
+    'black',
+    'brown',
+    'grey',
+    'turquoise'
+        ]
+
 
 class ProjectionInputs(Frame):
     def __init__(self, root):
@@ -79,6 +92,11 @@ class ProjectionInputs(Frame):
         Max = OptionMenu(self, self.maxVar, *MAX)
         Max.pack(side=LEFT)
 
+        self.colorVar = StringVar(self)
+        self.colorVar.set(colors[0])
+        color = OptionMenu(self, self.colorVar, *colors)
+        color.pack(side=LEFT)
+
         PlotButton = Button(self, text="Plot", command=self.add)
         PlotButton.pack(side=RIGHT)
 
@@ -91,6 +109,7 @@ class ProjectionInputs(Frame):
             self.mdmVar.get(),
             self.rcpVar.get(),
             self.hmsVar.get(),
+            self.colorVar.get(),
             MaxBool
         )
 

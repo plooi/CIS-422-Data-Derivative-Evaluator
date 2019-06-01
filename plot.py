@@ -13,7 +13,6 @@ data_array: an xarray dataarray object with streamflow values for a certain proj
 max: a Boolean value. True: plot the maximum streamflow, False: plot the mean streamflow.
 '''
 
-colors = ['red', 'blue', 'green', 'yellow', 'orange', 'purple', 'black', 'brown', 'grey', 'turquoise']
 
 def plot_timeseries(projections):
 
@@ -37,9 +36,9 @@ def plot_timeseries(projections):
         newPlot.show()
     return figure
 
-def add_projection(gcm: str, mdm: str, rcp: str, hms: str, mx: bool):
+def add_projection(gcm: str, mdm: str, rcp: str, hms: str, color: str, mx: bool):
     data = all_data.sel(parameters=hms, downscale_method=mdm, gcm=gcm, rcp=rcp)
-    new_projection = Projection(rcp, gcm, mdm, hms, data, mx)
+    new_projection = Projection(rcp, gcm, mdm, hms, color, data, mx)
     active_projections.append(new_projection)
 
 def create_figure() -> Figure:
@@ -62,7 +61,7 @@ def create_figure() -> Figure:
 
         newPlot.set_ylabel('cfs')
         newPlot.set_xlabel('year')
-        newPlot.plot([1950+i for i in range(150)], values, colors[plotNum])
+        newPlot.plot([1950+i for i in range(150)], values, projection.get_color())
         plotNum = (plotNum+1) % len(colors)
 
     return figure
