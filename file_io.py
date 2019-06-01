@@ -18,6 +18,6 @@ class FileIO:
 
     # Loads a .nc file from a given location
     def loadNC(self, file: str):
-        self.allData: xr.DataArray = xr.open_dataarray(file)
+        self.allData = xr.open_dataarray(file)
 
 fileIO = FileIO()
