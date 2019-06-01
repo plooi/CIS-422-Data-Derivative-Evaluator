@@ -139,8 +139,8 @@ class Projection:
     def __add__(self, other):
         self.data.append(other)
         return self
-    def remove(self, i):
-        del self.data[i]
+    def remove(self):
+        active_projections.remove(self)
     def __iter__(self):
         for i in range(len(self.data)):
             yield self.data[i]
