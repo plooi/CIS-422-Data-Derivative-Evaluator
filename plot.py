@@ -5,7 +5,6 @@ from matplotlib.figure import Figure
 from Projection import *
 
 
-
 '''
 A function which plots the maximum or mean daily streamflow values for a
 given projection.
@@ -14,6 +13,7 @@ data_array: an xarray dataarray object with streamflow values for a certain proj
 max: a Boolean value. True: plot the maximum streamflow, False: plot the mean streamflow.
 '''
 
+colors = ['red', 'blue', 'green', 'yellow', 'orange', 'purple', 'black', 'brown', 'grey', 'turquoise']
 
 def plot_timeseries(projections):
 
@@ -44,6 +44,7 @@ def add_projection(gcm: str, mdm: str, rcp: str, hms: str, mx: bool):
 
 def create_figure() -> Figure:
     figure = Figure(figsize=(8,5), dpi=100)
+    plotNum = 0
     for projection in active_projections:
         if not (projection.get_visibility()):
             continue
@@ -61,8 +62,7 @@ def create_figure() -> Figure:
 
         newPlot.set_ylabel('cfs')
         newPlot.set_xlabel('year')
-        newPlot.plot([1950+i for i in range(150)], values, color='blue')
+        newPlot.plot([1950+i for i in range(150)], values, colors[plotNum])
+        plotNum = (plotNum+1) % len(colors)
 
     return figure
-
-
