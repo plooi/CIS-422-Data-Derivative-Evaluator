@@ -60,6 +60,9 @@ class Projection:
         self.location = location
         self.visibility = visibility
         self.data = data
+    """
+    Getters and setters
+    """
     def get_rcp(self):
         return self.RCP
     def get_gcm(self):
@@ -138,8 +141,11 @@ class Projection:
     def __add__(self, other):
         self.data.append(other)
         return self
-    def remove(self, i):
-        del self.data[i]
+    """
+    Removes this projection object from the active projections
+    """
+    def remove(self):
+        active_projections.remove(self)
     def __iter__(self):
         for i in range(len(self.data)):
             yield self.data[i]

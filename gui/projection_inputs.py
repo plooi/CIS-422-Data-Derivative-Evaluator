@@ -8,7 +8,7 @@ Brian Truong
 '''
 
 from tkinter.constants import TOP, LEFT, RIGHT
-from tkinter import Frame, StringVar, OptionMenu, Button
+from tkinter import Frame, StringVar, OptionMenu, Button, messagebox
 
 from constants import GUI
 import gui_bootstrap as gb
@@ -103,15 +103,17 @@ class ProjectionInputs(Frame):
     def add(self):
         # def plot_button(gcm, mdm, rcp, hms, max):
         MaxBool = (self.maxVar.get() == 'MAX')
-
-        f = plot.add_projection(
+        try:
+            f = plot.add_projection(
             self.gcmVar.get(),
             self.mdmVar.get(),
             self.rcpVar.get(),
             self.hmsVar.get(),
             self.colorVar.get(),
             MaxBool
-        )
+            )
+        except:
+            messagebox.showinfo("Error Message", "One of your location, RCP, GCM, MDM, or HMS selections was invalid")
 
         pDisp = gb.main_window.getComponent(GUI.plotDisplay)
         pDisp.update()
