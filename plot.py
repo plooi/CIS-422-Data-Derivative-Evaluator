@@ -32,8 +32,9 @@ def create_figure() -> Figure:
     figure = Figure(figsize=(8, 5), dpi=100)
 
     newPlot = figure.add_subplot(1, 1, 1)
-    newPlot.set_ylabel('CFS')
-    newPlot.set_xlabel('Year')
+    newPlot.title.set_text('Annual Maximum or Mean Streamflow')
+    newPlot.set_ylabel('Streamflow (cms)')
+    newPlot.set_xlabel('Time (years 1950-2100)')
 
     for projection in active_projections:
         if not (projection.get_visibility()):
