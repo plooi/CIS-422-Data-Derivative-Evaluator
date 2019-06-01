@@ -26,7 +26,7 @@ class OutletSelection(Frame):
 
         ## buttons
         self.searchButton = Button(self, text="search!", command=self.search_callback)
-        self.searchButton.grid(row=0, column=2, sticky='nw')
+        self.searchButton.grid(row=0, column=2, sticky='nw', padx=15)
 
         self.results = Frame(self)
         self.results.grid(row=1, column=0, columnspan=3, sticky='nsew', padx=10, pady=10)
@@ -62,6 +62,4 @@ class OutletSelection(Frame):
         for loc in locations:
             # print(loc)
             self.outlets.insert(END, loc)
-
-
 
