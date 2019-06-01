@@ -16,8 +16,8 @@ data_array: an xarray dataarray object with streamflow values for a certain proj
 max: a Boolean value. True: plot the maximum streamflow, False: plot the mean streamflow.
 '''
 
-def add_projection(gcm: str, mdm: str, rcp: str, hms: str, color: str, mx: bool):
-    data = fileIO.allData.sel(parameters=hms, downscale_method=mdm, gcm=gcm, rcp=rcp)
+def add_projection(location: str, gcm: str, mdm: str, rcp: str, hms: str, color: str, mx: bool):
+    data = fileIO.allData.sel(outlets=location, parameters=hms, downscale_method=mdm, gcm=gcm, rcp=rcp)
     annual_values = []
     for i in range(2100 - 1950):
         year = str(1950 + i)
@@ -26,7 +26,7 @@ def add_projection(gcm: str, mdm: str, rcp: str, hms: str, color: str, mx: bool)
         if not mx:
             val = np.mean(data.sel(time=year))
         annual_values.append(val)
-    new_projection = Projection(rcp, gcm, mdm, hms, color, annual_values, mx)
+    new_projection = Projection(rcp, gcm, mdm, hms, color, annual_values, mx, location)
     active_projections.append(new_projection)
 
 def create_figure() -> Figure:
