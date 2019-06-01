@@ -115,13 +115,13 @@ class PListItem(Frame):
 
     def remove(self):
         # TODO Remove function not funcitoning as expected
-        # self.proj.remove()
+        self.proj.remove()
 
-        # pDisp = gb.main_window.getComponent(GUI.plotDisplay)
-        # pDisp.update()
+        pDisp = gb.main_window.getComponent(GUI.plotDisplay)
+        pDisp.update()
 
-        # pList = gb.main_window.getComponent(GUI.projectionsList)
-        # pList.update()
+        pList = gb.main_window.getComponent(GUI.projectionsList)
+        pList.update()
 
         return
 
