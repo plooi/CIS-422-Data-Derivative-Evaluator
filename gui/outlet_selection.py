@@ -60,7 +60,7 @@ class OutletSelection(Frame):
         locations = location.search_locations(t)
 
         for loc in locations:
-            print(loc)
+            # print(loc)
             self.outlets.insert(END, loc)
 
 
