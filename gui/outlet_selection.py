@@ -3,7 +3,8 @@ Outlet Selection
 Class definition
 
 Author:
-Brian Truong, Edward Cho
+Brian Truong,
+Edward Cho
 '''
 
 import tkinter as tk

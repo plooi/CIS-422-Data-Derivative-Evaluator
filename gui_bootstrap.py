@@ -12,6 +12,6 @@ main_window = None
 def bootstrap():
     from gui.main_window import MainWindow
 
-    global main_window 
+    global main_window
     main_window = MainWindow()
     main_window.mainloop()
