@@ -13,4 +13,4 @@ class FilePorterMenu(Menu):
     def __init__(self, root):
         Menu.__init__(self, root)
 
-        self.add_command(label="Import CVF")
+        self.add_command(label="Import .NC")

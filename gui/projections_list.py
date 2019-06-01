@@ -10,7 +10,7 @@ from tkinter.constants import RIGHT, END
 from tkinter import Frame, Scrollbar, Canvas, Label, Button, Checkbutton, IntVar
 
 from Projection import Projection, active_projections
-from constants import GUI
+from constants import GUI, FONT_SMALL
 
 import gui_bootstrap as gb
 
@@ -72,32 +72,40 @@ class PListItem(Frame):
     def __init__(self, root, projection: Projection):
         Frame.__init__(self, root)
 
-        self.root = root
         self.proj = projection
 
+        # Label that specifies the location
         # TODO Location not specified!
         Label(self,
             text=self.proj.get_location()
         ).grid(row=0, column=0, sticky='w')
         
+        # Checkbox that toggles visibility
         self.visibility = IntVar(self)
         self.visibility.set(1)
         Checkbutton(self, 
             variable=self.visibility, command=self.toggle
         ).grid(row=0, column=1, sticky='w')
 
+        # Describes the projection parameters
         self.params = Frame(self)
-        columns = ['RCP', 'GCM', 'MDM', 'HMS']
-        for i in range(len(columns)):
-            Label(self.params, text=columns[i]).grid(row=0, column=i, sticky='w')
-            Label(self.params, text=self.proj[columns[i]]).grid(row=1, column=i, sticky='w')
-        Label(self.params, text='MAX').grid(row=0, column=len(columns), sticky='w')
-        Label(self.params, text=str(self.proj.get_max())).grid(row=1, column=len(columns), sticky='w')
+        rows = ['RCP', 'GCM', 'MDM', 'HMS']
+        for i in range(len(rows)):
+            Label(self.params, text=rows[i] + ':', font=FONT_SMALL
+                ).grid(row=i, column=0, sticky='w')
+            Label(self.params, text=self.proj[rows[i]], font=FONT_SMALL
+                ).grid(row=i, column=1, sticky='w')
+        # Special case for the MAX
+        Label(self.params, text='MAX:', font=FONT_SMALL
+            ).grid(row=len(rows), column=0, sticky='w')
+        Label(self.params, text=str(self.proj.get_max()), font=FONT_SMALL
+            ).grid(row=len(rows), column=1, sticky='w')
         self.params.grid(row=1, column=0, columnspan=2, sticky='w')
 
+        # Button to remove the projection
         Button(self,
             text='✕', command=self.remove
-        ).grid(row=0, column=2, rowspan=2, sticky='e', padx=(5, 0))
+        ).grid(row=0, column=2, rowspan=2, sticky='ne', padx=(5, 0))
 
     def remove(self):
         # TODO Remove function not funcitoning as expected

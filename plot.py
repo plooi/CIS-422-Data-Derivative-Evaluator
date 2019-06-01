@@ -19,7 +19,7 @@ def plot_timeseries(projections):
     figure = Figure(figsize=(8,5), dpi=100)
     for projection in projections:
         # label = projection.rcp + "_" + projection.gcm + "_" + projection.mdm + "_" + projection.hms
-        newPlot = figure.add_subplot(111)
+        newPlot = figure.add_subplot(1, 1, 1)
 
         values = []
         for i in range(2100 - 1950):
@@ -42,13 +42,16 @@ def add_projection(gcm: str, mdm: str, rcp: str, hms: str, color: str, mx: bool)
     active_projections.append(new_projection)
 
 def create_figure() -> Figure:
-    figure = Figure(figsize=(8,5), dpi=100)
+    figure = Figure(figsize=(8, 5), dpi=100)
+
+    newPlot = figure.add_subplot(1, 1, 1)
+    newPlot.set_ylabel('CFS')
+    newPlot.set_xlabel('Year')
+
     for projection in active_projections:
         if not (projection.get_visibility()):
             continue
         # label = projection.rcp + "_" + projection.gcm + "_" + projection.mdm + "_" + projection.hms
-        newPlot = figure.add_subplot(111)
-
         values = []
         for i in range(2100 - 1950):
             year = str(1950 + i)
@@ -58,8 +61,6 @@ def create_figure() -> Figure:
                 val = np.mean(projection.data.sel(time=year))
             values.append(val)
 
-        newPlot.set_ylabel('cfs')
-        newPlot.set_xlabel('year')
         newPlot.plot([1950+i for i in range(150)], values, projection.get_color())
 
     return figure

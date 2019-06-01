@@ -5,3 +5,6 @@ class GUI:
     projectionInputs = 3
     projectionsList = 4
     plotDisplay = 5
+
+FONT = 'Sans Serif'
+FONT_SMALL = (FONT, 8)

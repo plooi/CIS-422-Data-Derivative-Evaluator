@@ -44,20 +44,20 @@ HMS = [
 MAX = [
     "MAX",
     "MEAN",
-        ]
+]
 
 colors = [
-    'red',
-    'blue',
-    'green',
-    'yellow',
-    'orange',
-    'purple',
-    'black',
-    'brown',
-    'grey',
-    'turquoise'
-        ]
+    'Red',
+    'Blue',
+    'Green',
+    'Yellow',
+    'Orange',
+    'Violet',
+    'Black',
+    'Brown',
+    'Grey',
+    'Turquoise'
+]
 
 
 class ProjectionInputs(Frame):
