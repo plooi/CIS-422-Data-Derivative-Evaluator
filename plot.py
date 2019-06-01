@@ -1,5 +1,7 @@
 import numpy as np
 import xarray as xr
+import matplotlib
+matplotlib.use('PS')
 import matplotlib.pyplot as plt
 from matplotlib.figure import Figure
 from Projection import *
@@ -17,6 +19,10 @@ max: a Boolean value. True: plot the maximum streamflow, False: plot the mean st
 def plot_timeseries(projections):
 
     figure = Figure(figsize=(8,5), dpi=100)
+    if projection.max:
+        figure.title('Annual Maximum Daily Streamflow')
+    else:
+        figure.title('Annual Mean Daily Streamflow')
     for projection in projections:
         # label = projection.rcp + "_" + projection.gcm + "_" + projection.mdm + "_" + projection.hms
         newPlot = figure.add_subplot(1, 1, 1)
