@@ -10,57 +10,71 @@ Edward Cho
 import tkinter as tk
 
 from tkinter.constants import RIGHT, END
-from tkinter import Frame, Listbox, Entry, Label, Button, StringVar, Scrollbar, Canvas
+from tkinter import Frame, Listbox, Entry, Label, Button, StringVar, Scrollbar, Canvas, IntVar, Checkbutton
 import Locations as location
 import gui_bootstrap as gb
 from constants import GUI, FONT_BOLD
 
 class OutletSelection(Frame):
-
-
     def __init__(self, root):
         Frame.__init__(self, root)
 
         self.rowconfigure(1, weight=1)
         self.columnconfigure(0, weight=1)
 
-        self.title = Label(self, text='Location: ').grid(row=0, column=0, sticky='nw')
+        ## Search
 
-        self.outletVariable = StringVar()
-        self.outletFilter = Entry(self, textvariable=self.outletVariable)
-        self.outletFilter.bind('<Return>', self._search_callback)
-        self.outletFilter.grid(row=0, column=1, sticky='ew')
+        search = Frame(self)
+        search.grid(row=0, column=0, columnspan=2, padx=8)
 
-        # Buttons
-        self.searchButton = Button(self, text="Search", command=self._search_callback)
-        self.searchButton.grid(row=0, column=2, sticky='nwe', padx=15)
+        self.title = Label(search, text='Location: ').grid(row=0, column=0)
 
-        # Listbox frame and scrollbars parent
-        self.results = Frame(self)
-        self.results.rowconfigure(0, weight=1)
-        self.results.columnconfigure(0, weight=1)
-        self.results.grid(row=1, column=0, columnspan=3, sticky='nsew')
+        self.outletVariable = StringVar(self)
+        self.outletFilter = Entry(search, textvariable=self.outletVariable)
+        self.outletFilter.grid(row=0, column=1, pady=10)
+        self.outletFilter.bind('<Return>', lambda e: self._search_callback())
+
+        self.searchButton = Button(search, text="Search", command=self._search_callback)
+        self.searchButton.grid(row=0, column=2, padx=(8, 0))
+
+        ## Results
 
         # Listbox with search results
-        self.outlets = Listbox(self.results, height=20, width=30)
-        self.outlets.grid(row=0, column=0, columnspan=2, sticky='nsew')
+        self.outlets = Listbox(self, height=20, width=30)
+        self.outlets.grid(row=1, column=0, sticky='nsew')
         self.outlets.bind('<<ListboxSelect>>', self._select_callback)
 
         # Y scrollbar
-        self.yscrollbar = Scrollbar(self.results, orient="vertical")
+        self.yscrollbar = Scrollbar(self, orient="vertical")
         self.yscrollbar.config(command=self.outlets.yview)
-        self.yscrollbar.grid(row=0, column=2, sticky="ns")
+        self.yscrollbar.grid(row=1, column=1, sticky="ns")
         self.outlets.config(yscrollcommand=self.yscrollbar.set)
 
         # X scrollbar
-        self.xscrollbar = Scrollbar(self.results, orient="horizontal")
+        self.xscrollbar = Scrollbar(self, orient="horizontal")
         self.xscrollbar.config(command=self.outlets.xview)
-        self.xscrollbar.grid(row=1, column=0, columnspan=2, sticky="ew")
+        self.xscrollbar.grid(row=2, column=0, sticky="ew")
         self.outlets.config(xscrollcommand=self.xscrollbar.set)
 
         self.locations = []
 
+        ## Filter
+        
+        toggle = Frame(self)
+        toggle.grid(row=3, column=0, sticky='w')
+
+        Label(toggle, text='Hide invalid locations').grid(row=0, column=0)
+
+        self.filterInvalid = IntVar(self)
+        self.filterInvalid.set(0)
+        Checkbutton(toggle,
+            variable=self.filterInvalid, command=self._search_callback
+        ).grid(row=0, column=1, sticky='w')
+
+        self.refresh()
+
     def refresh(self):
+        self.outletVariable.set('')
         self._search_callback()
 
     def _select_callback(self, event):
@@ -68,19 +82,25 @@ class OutletSelection(Frame):
         selection = widget.curselection()
         location = self.locations[selection[0]]
 
-        if (location.get_valid()):
-            pInputs = gb.main_window.getComponent(GUI.projectionInputs)
-            pInputs.setOutlet(location.get_abbreviation())
+        pInputs = gb.main_window.getComponent(GUI.projectionInputs)
+        pInputs.setOutlet(location.get_abbreviation())
 
-    def _search_callback(self, event=None):
+    def _search_callback(self):
         self.outlets.delete(0, END)
 
         t = str(self.outletVariable.get())
         self.locations = location.search_locations(t)
 
+        if self.filterInvalid.get():
+            rm = []
+            for loc in self.locations:
+                if not loc.get_valid():
+                    rm.append(loc)
+            for loc in rm:
+                self.locations.remove(loc)
+
         for i in range(len(self.locations)):
             loc = self.locations[i]
             self.outlets.insert(END, loc)
             if not loc.get_valid():
-                self.outlets.itemconfig(i, fg='grey')
-
+                self.outlets.itemconfig(i, selectbackground='grey80', selectforeground='grey', fg='grey80')

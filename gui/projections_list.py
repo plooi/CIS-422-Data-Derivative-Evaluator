@@ -47,7 +47,7 @@ class ProjectionsList(Frame):
         for child in self.list.winfo_children():
             child.destroy()
         for p in active_projections:
-            PListItem(self.list, p).pack(pady=(0, 8))
+            PListItem(self.list, p).pack(pady=(0, 8), fill='x')
 
     def _configure(self, event):
         # update the scrollbars to match the size of the inner frame
@@ -71,6 +71,8 @@ class ProjectionsList(Frame):
 class PListItem(Frame):
     def __init__(self, root, projection: Projection):
         Frame.__init__(self, root)
+        self.columnconfigure(1, weight=1)
+        self.columnconfigure(2, weight=1)
 
         self.proj = projection
         self.config(
@@ -81,7 +83,6 @@ class PListItem(Frame):
         )
 
         # Label that specifies the location
-        # TODO Location not specified!
         Label(self,
             text=self.proj.get_location()
         ).grid(row=0, column=0, sticky='w')
@@ -90,7 +91,7 @@ class PListItem(Frame):
         self.visibility = IntVar(self)
         self.visibility.set(1)
         Checkbutton(self, 
-            variable=self.visibility, command=self.toggle
+            variable=self.visibility, command=self._toggle
         ).grid(row=0, column=1, sticky='w')
 
         # Describes the projection parameters
@@ -110,10 +111,10 @@ class PListItem(Frame):
 
         # Button to remove the projection
         Button(self,
-            text='✕', command=self.remove
+            text='✕', command=self._remove
         ).grid(row=0, column=2, rowspan=2, sticky='ne', padx=(5, 0))
 
-    def remove(self):
+    def _remove(self):
         self.proj.remove()
 
         pDisp = gb.main_window.getComponent(GUI.plotDisplay)
@@ -122,7 +123,7 @@ class PListItem(Frame):
         pList = gb.main_window.getComponent(GUI.projectionsList)
         pList.update()
 
-    def toggle(self):
+    def _toggle(self):
         self.proj.set_visibility(self.visibility.get())
 
         pDisp = gb.main_window.getComponent(GUI.plotDisplay)
