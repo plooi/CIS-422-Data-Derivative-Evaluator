@@ -21,15 +21,15 @@ class OutletSelection(Frame):
     def __init__(self, root):
         Frame.__init__(self, root)
 
-        self.locations = []
-
         self.rowconfigure(1, weight=1)
         self.columnconfigure(0, weight=1)
 
         self.title = Label(self, text='Location: ').grid(row=0, column=0, sticky='nw')
 
         self.outletVariable = StringVar()
-        self.outletFilter = Entry(self, textvariable=self.outletVariable).grid(row=0, column=1, sticky='ew')
+        self.outletFilter = Entry(self, textvariable=self.outletVariable)
+        self.outletFilter.bind('<Return>', self._search_callback)
+        self.outletFilter.grid(row=0, column=1, sticky='ew')
 
         # Buttons
         self.searchButton = Button(self, text="Search", command=self._search_callback)
@@ -45,7 +45,6 @@ class OutletSelection(Frame):
         self.outlets = Listbox(self.results, height=20, width=30)
         self.outlets.grid(row=0, column=0, columnspan=2, sticky='nsew')
         self.outlets.bind('<<ListboxSelect>>', self._select_callback)
-        self._search_callback()
 
         # Y scrollbar
         self.yscrollbar = Scrollbar(self.results, orient="vertical")
@@ -59,6 +58,11 @@ class OutletSelection(Frame):
         self.xscrollbar.grid(row=1, column=0, columnspan=2, sticky="ew")
         self.outlets.config(xscrollcommand=self.xscrollbar.set)
 
+        self.locations = []
+
+    def refresh(self):
+        self._search_callback()
+
     def _select_callback(self, event):
         widget = event.widget
         selection = widget.curselection()
@@ -67,7 +71,7 @@ class OutletSelection(Frame):
         pInputs = gb.main_window.getComponent(GUI.projectionInputs)
         pInputs.setOutlet(code)
 
-    def _search_callback(self):
+    def _search_callback(self, event=None):
         self.outlets.delete(0, END)
 
         t = str(self.outletVariable.get())
