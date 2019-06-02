@@ -17,6 +17,7 @@ max: a Boolean value. True: plot the maximum streamflow, False: plot the mean st
 '''
 
 def add_projection(location: str, gcm: str, mdm: str, rcp: str, hms: str, color: str, mx: bool):
+    location = location.encode('ascii', 'igrore')
     data = fileIO.allData.sel(outlets=location, parameters=hms, downscale_method=mdm, gcm=gcm, rcp=rcp)
     annual_values = []
     for i in range(2100 - 1950):

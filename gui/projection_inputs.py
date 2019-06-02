@@ -15,32 +15,6 @@ import gui_bootstrap as gb
 import plot
 
 # Test constants
-RCP = [
-    "RCP45",
-    "RCP85"
-]
-GCM = [
-    "HadGEM2-CC",
-    "HadGEW2-ES",
-    "CanESM2",
-    "CNRM-CM5",
-    "CSIRO-Mk3-6-0",
-    "GFDL-ESM2M",
-    "inmcm4",
-    "MIROC5"
-    "IPSL-CM5A-MR",
-    "CCSM4"
-]
-MDM = [
-    "bcsd",
-    "maca",
-]
-HMS = [
-    "PRMS",
-    "calib_inverse",
-    "ORNL",
-    "NCAR"
-]
 MAX = [
     "MAX",
     "MEAN",
@@ -64,8 +38,10 @@ class ProjectionInputs(Frame):
     def __init__(self, root):
         Frame.__init__(self, root)
 
-        self.topMenus = Frame(self)
-        self.topMenus.pack(side=TOP, fill='x', expand=False)
+    def create(self, rcp, gcm, mdm, hms):
+        '''Creates the inputs, given the parameter lists'''
+        for child in self.winfo_children():
+            child.destroy()
 
         Label(self, text='Outlet: ').pack(side=LEFT)
         self.outVar = StringVar(self)
@@ -73,23 +49,23 @@ class ProjectionInputs(Frame):
         self.out = Label(self, textvariable=self.outVar).pack(side=LEFT)
 
         self.rcpVar = StringVar(self)
-        self.rcpVar.set(RCP[0])
-        rcp = OptionMenu(self, self.rcpVar, *RCP)
+        self.rcpVar.set(rcp[0])
+        rcp = OptionMenu(self, self.rcpVar, *rcp)
         rcp.pack(side=LEFT)
 
         self.gcmVar = StringVar(self)
-        self.gcmVar.set(GCM[0])
-        gcm = OptionMenu(self, self.gcmVar, *GCM)
+        self.gcmVar.set(gcm[0])
+        gcm = OptionMenu(self, self.gcmVar, *gcm)
         gcm.pack(side=LEFT)
 
         self.mdmVar = StringVar(self)
-        self.mdmVar.set(MDM[0])
-        mdm = OptionMenu(self, self.mdmVar, *MDM)
+        self.mdmVar.set(mdm[0])
+        mdm = OptionMenu(self, self.mdmVar, *mdm)
         mdm.pack(side=LEFT)
 
         self.hmsVar = StringVar(self)
-        self.hmsVar.set(HMS[0])
-        hms = OptionMenu(self, self.hmsVar, *HMS)
+        self.hmsVar.set(hms[0])
+        hms = OptionMenu(self, self.hmsVar, *hms)
         hms.pack(side=LEFT)
 
         self.maxVar = StringVar(self)
@@ -110,7 +86,6 @@ class ProjectionInputs(Frame):
         self.outVar.set(outlet)
 
     def add(self):
-        # def plot_button(gcm, mdm, rcp, hms, max):
         MaxBool = (self.maxVar.get() == 'MAX')
         try:
             f = plot.add_projection(
