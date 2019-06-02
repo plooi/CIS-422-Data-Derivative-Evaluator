@@ -19,11 +19,11 @@ class FilePorterMenu(Frame):
         Button(self, text='Import .NC', command=self.getNC).pack()
 
     def getNC(self):
-        try:
+        # try:
             file = filedialog.askopenfilename(
                 initialdir=OS_HOME_DIR, title='Select the data file', filetypes=FILE_INPUTS)
             if file != '':
                 fileIO.loadNC(file)
                 gb.main_window.setActiveNC(file)
-        except:
-            messagebox.showerror('Error', 'Cannot load file!')
+        # except:
+        #     messagebox.showerror('Error', 'Cannot load file!')

@@ -82,7 +82,7 @@ class Location:
     def set_valid(self, v):
         self.valid = v
     def __repr__(self):
-        return self.abbreviation + " : " + self.name + " : valid? " + str(self.is_valid())
+        return self.abbreviation + " : " + self.name # + " : valid? " + str(self.is_valid())
     def __str__(self):
         return repr(self)
 

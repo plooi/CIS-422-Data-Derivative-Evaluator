@@ -13,7 +13,7 @@ from tkinter.constants import RIGHT, END
 from tkinter import Frame, Listbox, Entry, Label, Button, StringVar, Scrollbar, Canvas
 import Locations as location
 import gui_bootstrap as gb
-from constants import GUI
+from constants import GUI, FONT_BOLD
 
 class OutletSelection(Frame):
 
@@ -66,10 +66,11 @@ class OutletSelection(Frame):
     def _select_callback(self, event):
         widget = event.widget
         selection = widget.curselection()
-        code = self.locations[selection[0]].get_abbreviation()
+        location = self.locations[selection[0]]
 
-        pInputs = gb.main_window.getComponent(GUI.projectionInputs)
-        pInputs.setOutlet(code)
+        if (location.get_valid()):
+            pInputs = gb.main_window.getComponent(GUI.projectionInputs)
+            pInputs.setOutlet(location.get_abbreviation())
 
     def _search_callback(self, event=None):
         self.outlets.delete(0, END)
@@ -77,6 +78,9 @@ class OutletSelection(Frame):
         t = str(self.outletVariable.get())
         self.locations = location.search_locations(t)
 
-        for loc in self.locations:
+        for i in range(len(self.locations)):
+            loc = self.locations[i]
             self.outlets.insert(END, loc)
+            if not loc.get_valid():
+                self.outlets.itemconfig(i, fg='grey')
 
