@@ -3,7 +3,7 @@ Author: Peter Looi
 5/30/19
 Locations.py: Implements a location search
 """
-
+import file_io
 
 
 
@@ -42,8 +42,23 @@ def search_locations(search_string):
                 break
         if add_the_location:
             ret.append(location)
+    tag_locations(ret)
     return ret
-
+def tag_locations(locations):
+    try:
+        x = file_io.fileIO.allData.outlets
+    except:
+        #allData is none
+        return
+    for outlet_abbreviation in file_io.fileIO.allData.outlets:
+        for location in locations:
+            if location.abbreviation == get_string(outlet_abbreviation):
+                location.set_valid(True)
+    
+def get_string(ob):
+    ob = repr(ob)
+    ob = ob[ob.find("b")+2:]
+    return ob[0:ob.find("'")]
 """
 search_locations returns a list of Location objects
 """
@@ -51,6 +66,7 @@ class Location:
     def __init__(self, abbreviation=None, name=None):
         self.abbreviation = abbreviation
         self.name = name
+        self.valid = False
     def set_abbreviation(self, abbreviation):
         self.abbreviation = abbreviation
     def get_abbreviation(self):
@@ -59,10 +75,16 @@ class Location:
         self.name = name
     def get_name(self):
         return self.name
+    def is_valid(self):
+        return self.valid
+    def get_valid(self):
+        return self.valid
+    def set_valid(self, v):
+        self.valid = v
     def __repr__(self):
-        return self.abbreviation + " : " + self.name
+        return self.abbreviation + " : " + self.name + " : valid? " + str(self.is_valid())
     def __str__(self):
-        return self.abbreviation + " : " + self.name
+        return repr(self)
 
 
 
