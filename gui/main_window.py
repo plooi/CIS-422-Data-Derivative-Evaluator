@@ -17,9 +17,7 @@ from gui.file_porter_menu import FilePorterMenu
 from gui.projections_list import ProjectionsList
 from gui.projection_inputs import ProjectionInputs
 from gui.plot_display import PlotDisplay
-from constants import GUI
-
-title = "Hydroclimate Change Data Visualizer - "
+from gui.constants import GUI
 
 # Main window class definition
 class MainWindow(Tk):
@@ -30,7 +28,7 @@ class MainWindow(Tk):
 
     # Initialize the main window and its child components
     def _init_window(self):
-        self.title(title + " No file selected")
+        self.title("Hydroclimate Change Data Visualizer")
         self.columnconfigure(1, weight=1)
         self.rowconfigure(2, weight=1)
 
@@ -41,7 +39,7 @@ class MainWindow(Tk):
         self.oSelection.grid(row=1, column=0, rowspan=2, sticky='ns')
 
         self.pInputs = ProjectionInputs(self)
-        self.pInputs.grid(row=1, column=1, sticky='ew')
+        self.pInputs.grid(row=1, column=1, columnspan=2, sticky='ew')
 
         self.pList = ProjectionsList(self)
         self.pList.grid(row=2, column=2, sticky='ns')

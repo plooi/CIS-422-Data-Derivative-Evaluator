@@ -7,8 +7,8 @@ Brian Truong
 '''
 
 import xarray as xr
-import gui_bootstrap as gb
-from constants import GUI
+import gui.bootstrap as gb
+from gui.constants import GUI
 
 class FileIO:
     def __init__(self):

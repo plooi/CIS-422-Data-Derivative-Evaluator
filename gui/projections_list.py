@@ -9,10 +9,10 @@ Brian Truong
 from tkinter.constants import RIGHT, END
 from tkinter import Frame, Scrollbar, Canvas, Label, Button, Checkbutton, IntVar
 
-from Projection import Projection, active_projections
-from constants import GUI, FONT_SMALL
+from data_processing.Projection import Projection, active_projections
+from gui.constants import GUI, FONT_SMALL
 
-import gui_bootstrap as gb
+import gui.bootstrap as gb
 
 # Class definition for the main Projections List component
 # Scrolling implementation from: https://stackoverflow.com/questions/16188420/tkinter-scrollbar-for-frame

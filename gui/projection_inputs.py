@@ -10,9 +10,9 @@ Brian Truong
 from tkinter.constants import TOP, LEFT, RIGHT
 from tkinter import Frame, StringVar, OptionMenu, Button, messagebox, Label
 
-from constants import GUI
-import gui_bootstrap as gb
-import plot
+from gui.constants import GUI
+import gui.bootstrap as gb
+import data_processing.plot as plot
 
 MAX = [
     "MAX",

@@ -1,7 +1,7 @@
 '''
 Main function that is the entrypoint to the application
 '''
-import gui_bootstrap as gb
+import gui.bootstrap as gb
 
 def main():
     gb.bootstrap()

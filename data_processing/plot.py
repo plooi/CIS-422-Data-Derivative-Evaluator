@@ -4,8 +4,9 @@ import matplotlib
 matplotlib.use('PS')
 import matplotlib.pyplot as plt
 from matplotlib.figure import Figure
-from Projection import *
-from file_io import fileIO
+
+from data_processing.Projection import *
+from data_processing.file_io import fileIO
 
 
 '''

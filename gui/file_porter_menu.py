@@ -10,8 +10,8 @@ Brian Truong
 from tkinter import Frame, Button, filedialog, messagebox, StringVar, Label
 from tkinter.constants import LEFT
 
-from file_io import fileIO
-from constants import OS_HOME_DIR, FILE_INPUTS
+from data_processing.file_io import fileIO
+from gui.constants import OS_HOME_DIR, FILE_INPUTS
 
 class FilePorterMenu(Frame):
     def __init__(self, root):

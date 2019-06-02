@@ -11,9 +11,10 @@ import tkinter as tk
 
 from tkinter.constants import RIGHT, END
 from tkinter import Frame, Listbox, Entry, Label, Button, StringVar, Scrollbar, Canvas, IntVar, Checkbutton
-import Locations as location
-import gui_bootstrap as gb
-from constants import GUI, FONT_BOLD
+
+import data_processing.Locations as location
+import gui.bootstrap as gb
+from gui.constants import GUI, FONT_BOLD
 
 class OutletSelection(Frame):
     def __init__(self, root):

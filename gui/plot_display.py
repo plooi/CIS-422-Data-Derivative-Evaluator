@@ -8,7 +8,7 @@ Brian Truong
 '''
 
 import matplotlib
-from Projection import active_projections
+from data_processing.Projection import active_projections
 matplotlib.use("TkAgg")
 
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
@@ -17,8 +17,9 @@ from matplotlib.figure import Figure
 
 from tkinter.constants import TOP, BOTH
 from tkinter import Frame, Listbox, StringVar, OptionMenu, filedialog, messagebox
-import plot
-from constants import OS_HOME_DIR
+
+import data_processing.plot as plot
+from gui.constants import OS_HOME_DIR
 
 class PlotDisplay(Frame):
     def __init__(self, root):

@@ -3,10 +3,7 @@ Author: Peter Looi
 5/30/19
 Locations.py: Implements a location search
 """
-import file_io
-
-
-
+import data_processing.file_io as file_io
 
 """
 This is the only function you need to worry about
@@ -54,11 +51,11 @@ def tag_locations(locations):
         for location in locations:
             if location.abbreviation == get_string(outlet_abbreviation):
                 location.set_valid(True)
-    
 def get_string(ob):
     ob = repr(ob)
     ob = ob[ob.find("b")+2:]
     return ob[0:ob.find("'")]
+
 """
 search_locations returns a list of Location objects
 """
@@ -85,16 +82,6 @@ class Location:
         return self.abbreviation + " : " + self.name # + " : valid? " + str(self.is_valid())
     def __str__(self):
         return repr(self)
-
-
-
-
-
-
-
-
-
-
 
 class CSV:
     def __init__(self, file_name):
@@ -129,8 +116,6 @@ def get_locations():
     return locations
 locations = get_locations()
 
-
-                
 def main():
     while True:
         p(search_locations(input("search:")))
@@ -139,4 +124,3 @@ def p(a):
         print(item)
 
 if __name__ == "__main__": main()
-        
