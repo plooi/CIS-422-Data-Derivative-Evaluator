@@ -84,6 +84,9 @@ class OutletSelection(Frame):
 
     def _select_callback(self, event):
         '''Select the outlet to be used for creating a projection'''
+        if len(self.locations) == 0:
+            return
+
         widget = event.widget
         selection = widget.curselection()
         location = self.locations[selection[0]]
