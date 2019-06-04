@@ -19,15 +19,15 @@ from gui.projection_inputs import ProjectionInputs
 from gui.plot_display import PlotDisplay
 from gui.constants import GUI
 
-# Main window class definition
 class MainWindow(Tk):
     def __init__(self, master=None):
         Tk.__init__(self)
         self.geometry("1280x720")
         self._init_window()
 
-    # Initialize the main window and its child components
     def _init_window(self):
+        '''Initialize the main window and its child components'''
+
         self.title("Hydroclimate Change Data Visualizer")
         self.columnconfigure(1, weight=1)
         self.rowconfigure(2, weight=1)
@@ -47,14 +47,10 @@ class MainWindow(Tk):
         self.pDisp = PlotDisplay(self)
         self.pDisp.grid(row=2, column=1, sticky='nswe')
 
-    # Get a component currently maintained in the GUI
     def getComponent(self, component: GUI
-        ) -> Union[OutletSelection,
-                   FilePorterMenu,
-                   ProjectionInputs,
-                   ProjectionsList,
-                   PlotDisplay,
-                   None]:
+        ) -> Union[OutletSelection, FilePorterMenu, ProjectionInputs, ProjectionsList, PlotDisplay, None]:
+        '''Get a component currently maintained in the GUI, returning that component'''
+
         if component == GUI.outletSelection:
             return self.oSelection
         elif component == GUI.filePorterMenu:

@@ -1,6 +1,8 @@
 '''
 Plot Display
-Class definition
+Class definitions
+
+Component that graphs the projections
 
 Author:
 Ben Lain
@@ -8,7 +10,7 @@ Brian Truong
 '''
 
 import matplotlib
-from data_processing.Projection import active_projections
+import data_processing.plot as plot
 matplotlib.use("TkAgg")
 
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
@@ -18,7 +20,6 @@ from matplotlib.figure import Figure
 from tkinter.constants import TOP, BOTH
 from tkinter import Frame, Listbox, StringVar, OptionMenu, filedialog, messagebox
 
-import data_processing.plot as plot
 from gui.constants import OS_HOME_DIR
 
 class PlotDisplay(Frame):
@@ -27,6 +28,7 @@ class PlotDisplay(Frame):
         self.update()
 
     def update(self):
+        '''Update the currently displayed plot'''
         for child in self.winfo_children():
             child.destroy()
 
@@ -39,7 +41,7 @@ class PlotDisplay(Frame):
         toolbar = PlotToolbar(canvas, self)
         toolbar.update()
 
-'''Overwrite Toolbar functions to fix errors'''
+# Overwrite Toolbar functions to fix errors
 class PlotToolbar(NavigationToolbar2Tk):
     def __init__(self, canvas, window):
         NavigationToolbar2Tk.__init__(self, canvas, window)

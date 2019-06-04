@@ -2,8 +2,11 @@
 Outlet Selection
 Class definition
 
+Component that allows user to choose which outlet
+from which to create a projection
+
 Author:
-Brian Truong,
+Brian Truong
 Edward Cho
 '''
 
@@ -23,7 +26,7 @@ class OutletSelection(Frame):
         self.rowconfigure(1, weight=1)
         self.columnconfigure(0, weight=1)
 
-        ## Search
+        ## Search bar
 
         search = Frame(self)
         search.grid(row=0, column=0, columnspan=2, padx=8)
@@ -38,7 +41,7 @@ class OutletSelection(Frame):
         self.searchButton = Button(search, text="Search", command=self._search_callback)
         self.searchButton.grid(row=0, column=2, padx=(8, 0))
 
-        ## Results
+        ## Results list
 
         # Listbox with search results
         self.outlets = Listbox(self, height=20, width=30)
@@ -59,8 +62,8 @@ class OutletSelection(Frame):
 
         self.locations = []
 
-        ## Filter
-        
+        ## Option to filter invalid locations
+
         toggle = Frame(self)
         toggle.grid(row=3, column=0, sticky='w')
 
@@ -75,10 +78,12 @@ class OutletSelection(Frame):
         self.refresh()
 
     def refresh(self):
+        '''Refresh the search content'''
         self.outletVariable.set('')
         self._search_callback()
 
     def _select_callback(self, event):
+        '''Select the outlet to be used for creating a projection'''
         widget = event.widget
         selection = widget.curselection()
         location = self.locations[selection[0]]
@@ -87,6 +92,7 @@ class OutletSelection(Frame):
         pInputs.setOutlet(location.get_abbreviation())
 
     def _search_callback(self):
+        '''Get and display the relevant search results'''
         self.outlets.delete(0, END)
 
         t = str(self.outletVariable.get())

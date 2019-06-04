@@ -6,5 +6,5 @@ import gui.bootstrap as gb
 def main():
     gb.bootstrap()
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()

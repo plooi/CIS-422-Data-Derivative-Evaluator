@@ -10,8 +10,12 @@ Author: Brian Truong
 main_window = None
 
 def bootstrap():
-    from gui.main_window import MainWindow
-
+    '''Launches the GUI'''
     global main_window
+
+    if (main_window != None):
+        return
+
+    from gui.main_window import MainWindow
     main_window = MainWindow()
     main_window.mainloop()

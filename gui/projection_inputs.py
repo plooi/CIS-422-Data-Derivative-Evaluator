@@ -2,23 +2,30 @@
 Projections Inputs
 Class definition
 
+Component that collects parameter choices
+from which a projection is created,
+except for the outlet location
+
 Author:
 Ben Lain
 Brian Truong
 '''
 
+from typing import List
+
 from tkinter.constants import TOP, LEFT, RIGHT
 from tkinter import Frame, StringVar, OptionMenu, Button, messagebox, Label
 
 from gui.constants import GUI
-import gui.bootstrap as gb
 import data_processing.plot as plot
 
+# Options for either a projection containing max or mean
 MAX = [
     "MAX",
     "MEAN",
 ]
 
+# Option for the color that the projection will be displayed as
 colors = [
     'Red',
     'Blue',
@@ -43,7 +50,7 @@ class ProjectionInputs(Frame):
         self.maxVar = StringVar(self)
         self.colorVar = StringVar(self)
 
-    def create(self, rcp, gcm, mdm, hms):
+    def create(self, rcp: List[str], gcm: List[str], mdm: List[str], hms: List[str]):
         '''Creates the inputs, given the parameter lists'''
         for child in self.winfo_children():
             child.destroy()
@@ -97,6 +104,7 @@ class ProjectionInputs(Frame):
         self.outVar.set(outlet)
 
     def add(self):
+        '''Adds the defined projection, and updates the GUI accordingly'''
         MaxBool = (self.maxVar.get() == 'MAX')
         try:
             f = plot.add_projection(
@@ -113,9 +121,3 @@ class ProjectionInputs(Frame):
                 "Parameter Error",
                 "One of your selections was invalid:\n" + str(e)
             )
-
-        pDisp = gb.main_window.getComponent(GUI.plotDisplay)
-        pDisp.update()
-
-        pList = gb.main_window.getComponent(GUI.projectionsList)
-        pList.update()

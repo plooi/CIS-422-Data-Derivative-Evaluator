@@ -2,6 +2,8 @@
 File IO
 Class definition
 
+Interacts with the system file IO
+
 Author:
 Brian Truong
 '''
@@ -15,10 +17,7 @@ class FileIO:
         self.allData = None
 
     def loadNC(self, file: str):
-        '''
-        Loads the given .nc file,
-        sets the required parameters as lists
-        '''
+        '''Loads the given .nc file, sets the required parameters as lists'''
         self.allData = xr.open_dataarray(file)
 
         rcp = self.allData.rcp.values
@@ -32,4 +31,5 @@ class FileIO:
         oSelection = gb.main_window.getComponent(GUI.outletSelection)
         oSelection.refresh()
 
+'''Static File IO object used throughout application'''
 fileIO = FileIO()
