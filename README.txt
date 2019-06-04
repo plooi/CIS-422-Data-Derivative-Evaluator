@@ -18,6 +18,7 @@ Program installation and setup
         Execute "pip install matplotlib"
         Execute "pip install xarray"
         Execute "pip install netCDF4"
+        Execute "pip install scipy"
     5. Execute "python main.py" to launch the software
     
 Directories
