@@ -39,7 +39,7 @@ class Location:
 """Class used to represent a CSV file"""
 class CSV:
     def __init__(self, file_name):
-        self.grid = read_csv(file_name)
+        self.grid = _read_csv(file_name)
     def __getitem__(self, i):
         return self.grid[i]
     def __len__(self):
@@ -62,7 +62,7 @@ def search_locations(search_string: str) -> List[Location]:
 
     Returns a list of Locations that match that search string
     """
-    locations = get_locations()
+    locations = _get_locations()
 
     # Return all locations on empty string
     search_string = search_string.strip()
@@ -89,11 +89,11 @@ def search_locations(search_string: str) -> List[Location]:
         if add_the_location:
             ret.append(location)
 
-    tag_locations(ret)
+    _tag_locations(ret)
 
     return ret
 
-def tag_locations(locations: List[Location]):
+def _tag_locations(locations: List[Location]):
     """Sets the validity of the locations"""
     try:
         x = file_io.fileIO.allData.outlets
@@ -102,16 +102,16 @@ def tag_locations(locations: List[Location]):
         return
     for outlet_abbreviation in file_io.fileIO.allData.outlets:
         for location in locations:
-            if location.abbreviation == get_string(outlet_abbreviation):
+            if location.abbreviation == _get_string(outlet_abbreviation):
                 location.set_valid(True)
 
-def get_string(ob):
+def _get_string(ob):
     """Parse out locations from list ASCII encoded strings"""
     ob = repr(ob)
     ob = ob[ob.find("b")+2:]
     return ob[0:ob.find("'")]
 
-def read_csv(csv_name: str) -> CSV:
+def _read_csv(csv_name: str) -> CSV:
     """Read a CSV file from a given filename"""
     f = open(csv_name)
     csv = []
@@ -119,7 +119,7 @@ def read_csv(csv_name: str) -> CSV:
         csv.append(line.split(";"))
     return csv
 
-def get_locations() -> List[Location]:
+def _get_locations() -> List[Location]:
     """Get a list of the locations from a CSV file"""
     c = CSV("streamflow_locations.csv")
     locations = []

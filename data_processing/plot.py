@@ -30,19 +30,19 @@ active_projections = []
 
 def add_projection(location: str, gcm: str, mdm: str, rcp: str, hms: str, color: str, mx: bool):
     '''
-    A function which plots the maximum or mean daily streamflow values for a given projection.
+    Creates an active Projection with the maximum or mean daily streamflow values
 
     Parameters
     location -- the outlet location
     gcm   -- global climate model
-    mdm   -- meterological downscaling method
+    mdm   -- meteorological  downscaling method
     rcp   -- representative concentration pathway
     hms   -- hydrologic model setup
     color -- the color of the projection's representation
-    mx    -- whether or not annual values are the max or the mean
+    mx    -- whether or not data values are the max or the mean
     '''
     # Properly encode the location key
-    location = location.encode('ascii', 'igrore')
+    location = location.encode('ascii', 'ignore')
 
     # Get the data from the netCDF using the given parameters
     data = fileIO.allData.sel(outlets=location, parameters=hms, downscale_method=mdm, gcm=gcm, rcp=rcp)
